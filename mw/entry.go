@@ -13,5 +13,7 @@ type EntryList struct {
 type Entry struct {
 	XMLName xml.Name `xml:"entry"`
 	ID      string   `xml:"id,attr"`
-	Def     string   `xml:"def>dt"`
+	Def     []string `xml:"def>dt"`
+	Type    string   `xml:"def>fl"`
+	Date    string   `xml:"def>date"`
 }
