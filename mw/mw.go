@@ -19,14 +19,16 @@ import (
 
 // MerriamWebster type contains word defination
 type MerriamWebster struct {
-	Word    string
-	Version string
+	Word        string
+	Version     string
+	Definitions []Definition
 }
 
-// Word represents word definition with some description
-type Word struct {
+// Definition represents word definition with some description
+type Definition struct {
 	Date   string
-	Def    string
+	Def    []string
+	Type   string
 	Extera string
 }
 
@@ -56,7 +58,11 @@ func (m *MerriamWebster) Fetch() error {
 
 	m.Version = el.Version
 	for _, e := range el.Entries {
-		fmt.Println(e.Def)
+		m.Definitions = append(m.Definitions, Definition{
+			Date: e.Date,
+			Def:  e.Def,
+			Type: e.Type,
+		})
 	}
 
 	return nil
