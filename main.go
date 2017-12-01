@@ -21,9 +21,16 @@ func main() {
 	flag.Parse()
 
 	for _, w := range flag.Args() {
-		err := mw.New(w).Fetch()
+		m := mw.New(w)
+
+		err := m.Fetch()
 		if err != nil {
 			fmt.Println(err)
+			continue
+		}
+
+		for _, d := range m.Definitions {
+			fmt.Println(d)
 		}
 	}
 }
