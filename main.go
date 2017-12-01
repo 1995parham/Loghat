@@ -13,12 +13,17 @@ package main
 import (
 	"flag"
 	"fmt"
+
+	"github.com/1995parham/Loghat/mw"
 )
 
 func main() {
 	flag.Parse()
 
 	for _, w := range flag.Args() {
-		fmt.Println(w)
+		err := mw.New(w).Fetch()
+		if err != nil {
+			fmt.Println(err)
+		}
 	}
 }
