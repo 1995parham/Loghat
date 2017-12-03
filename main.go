@@ -30,7 +30,12 @@ func main() {
 		}
 
 		for _, d := range w.Definitions {
-			fmt.Println(d)
+			fmt.Printf("> %s\n", d.EWord)
+			fmt.Printf("\t %s\n", d.Type)
+			fmt.Printf("\t %s:\n", d.Date)
+			for i, df := range d.Def {
+				fmt.Printf("\t %d. %s\n", i, df)
+			}
 		}
 	}
 }
