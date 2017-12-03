@@ -67,12 +67,15 @@ func (m *MerriamWebster) Fetch(word string) (*Word, error) {
 	var w Word
 	w.Version = el.Version
 	for _, e := range el.Entries {
-		w.Definitions = append(w.Definitions, Definition{
+		d := Definition{
 			Date:  e.Date,
-			Def:   e.Def,
-			Type:  e.Type,
+			Type:  e.FL,
 			EWord: e.Word,
-		})
+		}
+		for _, v := range e.Def {
+			d.Def = append(d.Def, v.V)
+		}
+		w.Definitions = append(w.Definitions, d)
 	}
 
 	return &w, nil
