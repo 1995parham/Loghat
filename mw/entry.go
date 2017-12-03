@@ -14,6 +14,7 @@ type Entry struct {
 	XMLName xml.Name `xml:"entry"`
 	ID      string   `xml:"id,attr"`
 	Def     []string `xml:"def>dt"`
-	Type    string   `xml:"def>fl"`
+	Type    string   `xml:"fl"`
 	Date    string   `xml:"def>date"`
+	Word    string   `xml:"ew"`
 }
