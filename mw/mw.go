@@ -48,20 +48,20 @@ func New(key string, dictionary string) *MerriamWebster {
 }
 
 // Fetch word definition
-func (m *MerriamWebster) Fetch(word string) (*Word, error) {
+func (m *MerriamWebster) Fetch(word string) (*Word, []string, error) {
 	resp, err := http.Get(fmt.Sprintf("https://www.dictionaryapi.com/api/v1/references/%s/xml/%s?key=%s", m.dictionary, word, m.key))
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("Status error: %v", resp.StatusCode)
+		return nil, nil, fmt.Errorf("Status error: %v", resp.StatusCode)
 	}
 
 	var el EntryList
 	if err = xml.NewDecoder(resp.Body).Decode(&el); err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
 	var w Word
@@ -78,5 +78,5 @@ func (m *MerriamWebster) Fetch(word string) (*Word, error) {
 		w.Definitions = append(w.Definitions, d)
 	}
 
-	return &w, nil
+	return &w, el.Suggestions, nil
 }

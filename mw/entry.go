@@ -4,9 +4,10 @@ import "encoding/xml"
 
 // EntryList represents list of entries.
 type EntryList struct {
-	XMLName xml.Name `xml:"entry_list"`
-	Version string   `xml:"version,attr"`
-	Entries []Entry  `xml:"entry"`
+	XMLName     xml.Name `xml:"entry_list"`
+	Version     string   `xml:"version,attr"`
+	Entries     []Entry  `xml:"entry"`
+	Suggestions []string `xml:"suggestion"`
 }
 
 // Entry represents merriam webster word definition section
