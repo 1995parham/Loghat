@@ -23,10 +23,14 @@ func main() {
 
 	for _, w := range flag.Args() {
 
-		w, err := m.Fetch(w)
+		w, ss, err := m.Fetch(w)
 		if err != nil {
 			fmt.Println(err)
 			continue
+		}
+
+		for _, s := range ss {
+			fmt.Printf("Did you mean %q ?\n", s)
 		}
 
 		for _, d := range w.Definitions {
