@@ -32,6 +32,7 @@ type Word struct {
 
 // Definition represents word definition with some description
 type Definition struct {
+	EWord  string
 	Date   string
 	Def    []string
 	Type   string
@@ -67,9 +68,10 @@ func (m *MerriamWebster) Fetch(word string) (*Word, error) {
 	w.Version = el.Version
 	for _, e := range el.Entries {
 		w.Definitions = append(w.Definitions, Definition{
-			Date: e.Date,
-			Def:  e.Def,
-			Type: e.Type,
+			Date:  e.Date,
+			Def:   e.Def,
+			Type:  e.Type,
+			EWord: e.Word,
 		})
 	}
 
