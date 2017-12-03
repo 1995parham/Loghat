@@ -13,8 +13,13 @@ type EntryList struct {
 type Entry struct {
 	XMLName xml.Name `xml:"entry"`
 	ID      string   `xml:"id,attr"`
-	Def     []string `xml:"def>dt"`
-	Type    string   `xml:"fl"`
+	Def     []DT     `xml:"def>dt"` // Defining Text
+	FL      string   `xml:"fl"`     // Functional Label
 	Date    string   `xml:"def>date"`
 	Word    string   `xml:"ew"`
+}
+
+// DT represents holder for word defintion xml
+type DT struct {
+	V string `xml:",innerxml"`
 }
