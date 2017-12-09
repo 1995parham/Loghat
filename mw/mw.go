@@ -23,7 +23,7 @@ type MerriamWebster struct {
 	dictionary string
 }
 
-// Word type contains word defination
+// Word type contains word definations
 type Word struct {
 	Word        string
 	Version     string
@@ -32,14 +32,15 @@ type Word struct {
 
 // Definition represents word definition with some description
 type Definition struct {
-	EWord  string
-	Date   string
-	Def    []string
-	Type   string
-	Extera string
+	EWord      string
+	Date       string   // date of first recorded use
+	Def        []string // definition field
+	Type       string
+	Synonymous []string
+	Extera     string
 }
 
-// New creates merriam-webster object with given key and dictionary
+// New creates merriam-webster object with given key and dictionary name
 func New(key string, dictionary string) *MerriamWebster {
 	return &MerriamWebster{
 		key:        key,
@@ -74,6 +75,7 @@ func (m *MerriamWebster) Fetch(word string) (*Word, []string, error) {
 		}
 		for _, v := range e.Def {
 			d.Def = append(d.Def, v.V)
+			d.Synonymous = v.Sx
 		}
 		w.Definitions = append(w.Definitions, d)
 	}

@@ -22,5 +22,6 @@ type Entry struct {
 
 // DT represents holder for word defintion xml
 type DT struct {
-	V string `xml:",innerxml"`
+	Sx []string `xml:"sx"`
+	V  string   `xml:",innerxml"`
 }
